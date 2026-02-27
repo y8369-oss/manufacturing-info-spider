@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}新闻资讯 - {{ site_title }}{% endblock %}
+
+{% block extra_js %}
+<script>
+function searchNews() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const items = document.querySelectorAll('.item-card');
+
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', searchNews);
+    }
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 1rem; color: #333;">📰 新闻资讯</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索新闻标题、来源或关键词...">
+</div>
+
+{% if news_list %}
+    <p style="color: #666; margin-bottom: 1rem;">共 {{ news_list|length }} 条新闻</p>
+
+    {% for news in news_list %}
+    <div class="item-card">
+        <h3><a href="{{ news.url }}" target="_blank">{{ news.title }}</a></h3>
+        <div class="item-meta">
+            <span>📌 {{ news.source }}</span>
+            {% if news.publish_date %}
+            <span>📅 {{ news.publish_date }}</span>
+            {% endif %}
+            {% if news.score %}
+            <span>⭐ 匹配度: {{ news.score }}</span>
+            {% endif %}
+        </div>
+        {% if news.summary %}
+        <div class="item-description">{{ news.summary }}</div>
+        {% endif %}
+        {% if news.keywords %}
+        <div class="keywords">
+            {% for keyword in news.keywords %}
+            <span class="keyword-tag">#{{ keyword }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="empty-state">
+        <p>暂无新闻数据</p>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">系统会定期抓取制造业相关新闻，请稍后查看</p>
+    </div>
+{% endif %}
+{% endblock %}

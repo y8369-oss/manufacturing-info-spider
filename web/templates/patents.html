@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}专利信息 - {{ site_title }}{% endblock %}
+
+{% block extra_js %}
+<script>
+function searchPatents() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const items = document.querySelectorAll('.item-card');
+
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', searchPatents);
+    }
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 1rem; color: #333;">🔬 专利信息</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索专利标题、申请人或关键词...">
+</div>
+
+{% if patents_list %}
+    <p style="color: #666; margin-bottom: 1rem;">共 {{ patents_list|length }} 项专利</p>
+
+    {% for patent in patents_list %}
+    <div class="item-card">
+        <h3>{{ patent.title }}</h3>
+        <div class="item-meta">
+            <span>📋 申请号: {{ patent.application_no }}</span>
+            {% if patent.publication_no %}
+            <span>📄 公开号: {{ patent.publication_no }}</span>
+            {% endif %}
+        </div>
+        <div class="item-meta">
+            {% if patent.applicant %}
+            <span>🏢 申请人: {{ patent.applicant }}</span>
+            {% endif %}
+            {% if patent.inventor %}
+            <span>✍️ 发明人: {{ patent.inventor }}</span>
+            {% endif %}
+        </div>
+        <div class="item-meta">
+            {% if patent.application_date %}
+            <span>📅 申请日: {{ patent.application_date }}</span>
+            {% endif %}
+            {% if patent.publication_date %}
+            <span>📅 公开日: {{ patent.publication_date }}</span>
+            {% endif %}
+        </div>
+        {% if patent.abstract %}
+        <div class="item-description">{{ patent.abstract }}</div>
+        {% endif %}
+        {% if patent.keywords %}
+        <div class="keywords">
+            {% for keyword in patent.keywords %}
+            <span class="keyword-tag">#{{ keyword }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="empty-state">
+        <p>暂无专利数据</p>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">系统会定期抓取制造业相关专利，请稍后查看</p>
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="stats">
+    <div class="stat-card">
+        <h3>{{ news_count }}</h3>
+        <p>新闻资讯</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ patents_count }}</h3>
+        <p>专利信息</p>
+    </div>
+    <div class="stat-card">
+        <h3>{{ papers_count }}</h3>
+        <p>学术论文</p>
+    </div>
+</div>
+
+<h2 style="margin-bottom: 1rem; color: #333;">📰 最新新闻</h2>
+{% if latest_news %}
+    {% for news in latest_news %}
+    <div class="item-card">
+        <h3><a href="{{ news.url }}" target="_blank">{{ news.title }}</a></h3>
+        <div class="item-meta">
+            <span>📌 {{ news.source }}</span>
+            {% if news.publish_date %}
+            <span>📅 {{ news.publish_date }}</span>
+            {% endif %}
+        </div>
+        {% if news.summary %}
+        <div class="item-description">{{ news.summary }}</div>
+        {% endif %}
+        {% if news.keywords %}
+        <div class="keywords">
+            {% for keyword in news.keywords %}
+            <span class="keyword-tag">#{{ keyword }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <p style="text-align: center; margin-top: 1rem;">
+        <a href="news.html" style="color: #667eea; text-decoration: none; font-weight: 500;">查看更多新闻 →</a>
+    </p>
+{% else %}
+    <div class="empty-state">
+        <p>暂无新闻数据</p>
+    </div>
+{% endif %}
+
+<h2 style="margin: 2rem 0 1rem; color: #333;">🔬 最新专利</h2>
+{% if latest_patents %}
+    {% for patent in latest_patents %}
+    <div class="item-card">
+        <h3>{{ patent.title }}</h3>
+        <div class="item-meta">
+            <span>📋 {{ patent.application_no }}</span>
+            {% if patent.applicant %}
+            <span>🏢 {{ patent.applicant }}</span>
+            {% endif %}
+            {% if patent.application_date %}
+            <span>📅 {{ patent.application_date }}</span>
+            {% endif %}
+        </div>
+        {% if patent.abstract %}
+        <div class="item-description">{{ patent.abstract[:200] }}{% if patent.abstract|length > 200 %}...{% endif %}</div>
+        {% endif %}
+        {% if patent.keywords %}
+        <div class="keywords">
+            {% for keyword in patent.keywords %}
+            <span class="keyword-tag">#{{ keyword }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <p style="text-align: center; margin-top: 1rem;">
+        <a href="patents.html" style="color: #667eea; text-decoration: none; font-weight: 500;">查看更多专利 →</a>
+    </p>
+{% else %}
+    <div class="empty-state">
+        <p>暂无专利数据</p>
+    </div>
+{% endif %}
+
+<h2 style="margin: 2rem 0 1rem; color: #333;">📚 最新论文</h2>
+{% if latest_papers %}
+    {% for paper in latest_papers %}
+    <div class="item-card">
+        <h3>{% if paper.pdf_url %}<a href="{{ paper.pdf_url }}" target="_blank">{{ paper.title }}</a>{% else %}{{ paper.title }}{% endif %}</h3>
+        <div class="item-meta">
+            <span>✍️ {{ paper.authors[:100] }}{% if paper.authors|length > 100 %}...{% endif %}</span>
+            {% if paper.publish_date %}
+            <span>📅 {{ paper.publish_date }}</span>
+            {% endif %}
+        </div>
+        {% if paper.abstract %}
+        <div class="item-description">{{ paper.abstract[:200] }}{% if paper.abstract|length > 200 %}...{% endif %}</div>
+        {% endif %}
+        {% if paper.keywords %}
+        <div class="keywords">
+            {% for keyword in paper.keywords %}
+            <span class="keyword-tag">#{{ keyword }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <p style="text-align: center; margin-top: 1rem;">
+        <a href="papers.html" style="color: #667eea; text-decoration: none; font-weight: 500;">查看更多论文 →</a>
+    </p>
+{% else %}
+    <div class="empty-state">
+        <p>暂无论文数据</p>
+    </div>
+{% endif %}
+{% endblock %}

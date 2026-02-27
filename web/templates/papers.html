@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}学术论文 - {{ site_title }}{% endblock %}
+
+{% block extra_js %}
+<script>
+function searchPapers() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const items = document.querySelectorAll('.item-card');
+
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', searchPapers);
+    }
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<h2 style="margin-bottom: 1rem; color: #333;">📚 学术论文</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索论文标题、作者或关键词...">
+</div>
+
+{% if papers_list %}
+    <p style="color: #666; margin-bottom: 1rem;">共 {{ papers_list|length }} 篇论文</p>
+
+    {% for paper in papers_list %}
+    <div class="item-card">
+        <h3>
+            {% if paper.pdf_url %}
+            <a href="{{ paper.pdf_url }}" target="_blank">{{ paper.title }}</a>
+            {% else %}
+            {{ paper.title }}
+            {% endif %}
+        </h3>
+        {% if paper.title_cn %}
+        <p style="color: #666; margin-top: 0.25rem; font-size: 0.95rem;">{{ paper.title_cn }}</p>
+        {% endif %}
+        <div class="item-meta">
+            <span>✍️ {{ paper.authors }}</span>
+            {% if paper.publish_date %}
+            <span>📅 {{ paper.publish_date }}</span>
+            {% endif %}
+            {% if paper.arxiv_id %}
+            <span>🔖 arXiv: {{ paper.arxiv_id }}</span>
+            {% endif %}
+        </div>
+        {% if paper.abstract %}
+        <div class="item-description">{{ paper.abstract }}</div>
+        {% endif %}
+        {% if paper.abstract_cn %}
+        <div class="item-description" style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #eee;">
+            <strong>摘要（中文）:</strong> {{ paper.abstract_cn }}
+        </div>
+        {% endif %}
+        {% if paper.keywords %}
+        <div class="keywords">
+            {% for keyword in paper.keywords %}
+            <span class="keyword-tag">#{{ keyword }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if paper.pdf_url %}
+        <div style="margin-top: 0.75rem;">
+            <a href="{{ paper.pdf_url }}" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                📄 查看PDF
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="empty-state">
+        <p>暂无论文数据</p>
+        <p style="font-size: 0.9rem; margin-top: 1rem;">系统会定期抓取制造业相关学术论文，请稍后查看</p>
+    </div>
+{% endif %}
+{% endblock %}

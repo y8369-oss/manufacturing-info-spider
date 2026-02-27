@@ -1,0 +1,65 @@
+{
+  "news_sources": [
+    {
+      "name": "36氪",
+      "base_url": "https://www.36kr.com",
+      "search_url": "https://www.36kr.com/search/articles/{keyword}",
+      "enabled": true,
+      "type": "api"
+    },
+    {
+      "name": "机器人网",
+      "base_url": "http://www.robot-china.com",
+      "search_url": "http://www.robot-china.com/news/",
+      "enabled": true,
+      "type": "html"
+    },
+    {
+      "name": "智能制造网",
+      "base_url": "https://www.gkzhan.com",
+      "search_url": "https://www.gkzhan.com/news/",
+      "enabled": true,
+      "type": "html"
+    },
+    {
+      "name": "雷锋网",
+      "base_url": "https://www.leiphone.com",
+      "search_url": "https://www.leiphone.com/search?s={keyword}",
+      "enabled": true,
+      "type": "html"
+    }
+  ],
+  "patent_sources": [
+    {
+      "name": "国家知识产权局",
+      "base_url": "http://pss-system.cponline.cnipa.gov.cn",
+      "search_api": "http://pss-system.cponline.cnipa.gov.cn/sipopublicsearch/patentsearch/searchHomeIndex",
+      "enabled": true,
+      "type": "api"
+    },
+    {
+      "name": "百度学术专利",
+      "base_url": "https://xueshu.baidu.com",
+      "search_url": "https://xueshu.baidu.com/s?wd={keyword}&tn=SE_baiduxueshu_c1gjeupa&ie=utf-8&filter=sc_type%3D%7B2%7D",
+      "enabled": true,
+      "type": "html"
+    }
+  ],
+  "paper_sources": [
+    {
+      "name": "arXiv",
+      "base_url": "http://export.arxiv.org",
+      "api_url": "http://export.arxiv.org/api/query",
+      "enabled": true,
+      "type": "api",
+      "categories": ["cs.RO", "cs.CV", "cs.AI", "cs.LG"]
+    },
+    {
+      "name": "百度学术",
+      "base_url": "https://xueshu.baidu.com",
+      "search_url": "https://xueshu.baidu.com/s?wd={keyword}&tn=SE_baiduxueshu_c1gjeupa&ie=utf-8",
+      "enabled": false,
+      "type": "html"
+    }
+  ]
+}
