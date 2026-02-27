@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学术论文 - 制造业信息资讯</title>
+    <meta name="description" content="智能制造、机器人、AI技术相关新闻、专利、论文汇总">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #764ba2;
+        }
+
+        main {
+            padding: 2rem 0;
+            min-height: calc(100vh - 300px);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .item-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .item-card h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .item-card h3 a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .item-card h3 a:hover {
+            color: #667eea;
+        }
+
+        .item-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-meta span {
+            margin-right: 1rem;
+        }
+
+        .item-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .keyword-tag {
+            background: #e8f4f8;
+            color: #667eea;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        .search-box {
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .stat-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>制造业信息资讯</h1>
+            <p>智能制造、机器人、AI技术相关新闻、专利、论文汇总</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html" class="">首页</a></li>
+                <li><a href="news.html" class="">新闻资讯</a></li>
+                <li><a href="patents.html" class="">专利信息</a></li>
+                <li><a href="papers.html" class="active">学术论文</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            
+<h2 style="margin-bottom: 1rem; color: #333;">📚 学术论文</h2>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="搜索论文标题、作者或关键词...">
+</div>
+
+
+    <p style="color: #666; margin-bottom: 1rem;">共 6 篇论文</p>
+
+    
+    <div class="item-card">
+        <h3>
+            
+            <a href="https://arxiv.org/pdf/2602.23331v1" target="_blank">Utilizing LLMs for Industrial Process Automation</a>
+            
+        </h3>
+        
+        <div class="item-meta">
+            <span>✍️ Salim Fares</span>
+            
+            <span>📅 2026-02-26</span>
+            
+            
+            <span>🔖 arXiv: 2602.23331v1</span>
+            
+        </div>
+        
+        <div class="item-description">A growing number of publications address the best practices to use Large Language Models (LLMs) for software engineering in recent years. However, most of this work focuses on widely-used general purpose programming languages like Python due to their widespread usage training data. The utility of LLMs for software within the industrial process automation domain, with highly-specialized languages that are typically only used in proprietary contexts, remains underexplored. This research aims to utilize and integrate LLMs in the industrial development process, solving real-life programming tasks (e.g., generating a movement routine for a robotic arm) and accelerating the development cycles of manufacturing systems.</div>
+        
+        
+        
+        <div class="keywords">
+            
+            <span class="keyword-tag">#manufacturing</span>
+            
+            <span class="keyword-tag">#automation</span>
+            
+            <span class="keyword-tag">#robot</span>
+            
+        </div>
+        
+        
+        <div style="margin-top: 0.75rem;">
+            <a href="https://arxiv.org/pdf/2602.23331v1" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                📄 查看PDF
+            </a>
+        </div>
+        
+    </div>
+    
+    <div class="item-card">
+        <h3>
+            
+            <a href="https://arxiv.org/pdf/2602.23330v1" target="_blank">Toward Expert Investment Teams:A Multi-Agent LLM System with Fine-Grained Trading Tasks</a>
+            
+        </h3>
+        
+        <div class="item-meta">
+            <span>✍️ Kunihiro Miyazaki, Takanobu Kawahara, Stephen Roberts, Stefan Zohren</span>
+            
+            <span>📅 2026-02-26</span>
+            
+            
+            <span>🔖 arXiv: 2602.23330v1</span>
+            
+        </div>
+        
+        <div class="item-description">The advancement of large language models (LLMs) has accelerated the development of autonomous financial trading systems. While mainstream approaches deploy multi-agent systems mimicking analyst and manager roles, they often rely on abstract instructions that overlook the intricacies of real-world workflows, which can lead to degraded inference performance and less transparent decision-making. Therefore, we propose a multi-agent LLM trading framework that explicitly decomposes investment analysis into fine-grained tasks, rather than providing coarse-grained instructions. We evaluate the proposed framework using Japanese stock data, including prices, financial statements, news, and macro information, under a leakage-controlled backtesting setting. Experimental results show that fine-grained task decomposition significantly improves risk-adjusted returns compared to conventional coarse-grained designs. Crucially, further analysis of intermediate agent outputs suggests that alignment between analytical outputs and downstream decision preferences is a critical driver of system performance. Moreover, we conduct standard portfolio optimization, exploiting low correlation with the stock index and the variance of each system's output. This approach achieves superior performance. These findings contribute to the design of agent structure and task configuration when applying LLM agents to trading systems in practical settings.</div>
+        
+        
+        
+        <div class="keywords">
+            
+            <span class="keyword-tag">#multi-agent</span>
+            
+        </div>
+        
+        
+        <div style="margin-top: 0.75rem;">
+            <a href="https://arxiv.org/pdf/2602.23330v1" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                📄 查看PDF
+            </a>
+        </div>
+        
+    </div>
+    
+    <div class="item-card">
+        <h3>
+            
+            <a href="https://arxiv.org/pdf/2602.23312v1" target="_blank">Evaluating Zero-Shot and One-Shot Adaptation of Small Language Models in Leader-Follower Interaction</a>
+            
+        </h3>
+        
+        <div class="item-meta">
+            <span>✍️ Rafael R. Baptista, André de Lima Salgado, Ricardo V. Godoy, Marcelo Becker, Thiago Boaventura, Gustavo J. G. Lahr</span>
+            
+            <span>📅 2026-02-26</span>
+            
+            
+            <span>🔖 arXiv: 2602.23312v1</span>
+            
+        </div>
+        
+        <div class="item-description">Leader-follower interaction is an important paradigm in human-robot interaction (HRI). Yet, assigning roles in real time remains challenging for resource-constrained mobile and assistive robots. While large language models (LLMs) have shown promise for natural communication, their size and latency limit on-device deployment. Small language models (SLMs) offer a potential alternative, but their effectiveness for role classification in HRI has not been systematically evaluated. In this paper, we present a benchmark of SLMs for leader-follower communication, introducing a novel dataset derived from a published database and augmented with synthetic samples to capture interaction-specific dynamics. We investigate two adaptation strategies: prompt engineering and fine-tuning, studied under zero-shot and one-shot interaction modes, compared with an untrained baseline. Experiments with Qwen2.5-0.5B reveal that zero-shot fine-tuning achieves robust classification performance (86.66% accuracy) while maintaining low latency (22.2 ms per sample), significantly outperforming baseline and prompt-engineered approaches. However, results also indicate a performance degradation in one-shot modes, where increased context length challenges the model's architectural capacity. These findings demonstrate that fine-tuned SLMs provide an effective solution for direct role assignment, while highlighting critical trade-offs between dialogue complexity and classification reliability on the edge.</div>
+        
+        
+        
+        <div class="keywords">
+            
+            <span class="keyword-tag">#robot</span>
+            
+        </div>
+        
+        
+        <div style="margin-top: 0.75rem;">
+            <a href="https://arxiv.org/pdf/2602.23312v1" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                📄 查看PDF
+            </a>
+        </div>
+        
+    </div>
+    
+    <div class="item-card">
+        <h3>
+            
+            <a href="https://arxiv.org/pdf/2602.23295v1" target="_blank">ManifoldGD: Training-Free Hierarchical Manifold Guidance for Diffusion-Based Dataset Distillation</a>
+            
+        </h3>
+        
+        <div class="item-meta">
+            <span>✍️ Ayush Roy, Wei-Yang Alex Lee, Rudrasis Chakraborty, Vishnu Suresh Lokhande</span>
+            
+            <span>📅 2026-02-26</span>
+            
+            
+            <span>🔖 arXiv: 2602.23295v1</span>
+            
+        </div>
+        
+        <div class="item-description">In recent times, large datasets hinder efficient model training while also containing redundant concepts. Dataset distillation aims to synthesize compact datasets that preserve the knowledge of large-scale training sets while drastically reducing storage and computation. Recent advances in diffusion models have enabled training-free distillation by leveraging pre-trained generative priors; however, existing guidance strategies remain limited. Current score-based methods either perform unguided denoising or rely on simple mode-based guidance toward instance prototype centroids (IPC centroids), which often are rudimentary and suboptimal. We propose Manifold-Guided Distillation (ManifoldGD), a training-free diffusion-based framework that integrates manifold consistent guidance at every denoising timestep. Our method employs IPCs computed via a hierarchical, divisive clustering of VAE latent features, yielding a multi-scale coreset of IPCs that captures both coarse semantic modes and fine intra-class variability. Using a local neighborhood of the extracted IPC centroids, we create the latent manifold for each diffusion denoising timestep. At each denoising step, we project the mode-alignment vector onto the local tangent space of the estimated latent manifold, thus constraining the generation trajectory to remain manifold-faithful while preserving semantic consistency. This formulation improves representativeness, diversity, and image fidelity without requiring any model retraining. Empirical results demonstrate consistent gains over existing training-free and training-based baselines in terms of FID, l2 distance among real and synthetic dataset embeddings, and classification accuracy, establishing ManifoldGD as the first geometry-aware training-free data distillation framework.</div>
+        
+        
+        
+        <div class="keywords">
+            
+            <span class="keyword-tag">#diffusion model</span>
+            
+        </div>
+        
+        
+        <div style="margin-top: 0.75rem;">
+            <a href="https://arxiv.org/pdf/2602.23295v1" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                📄 查看PDF
+            </a>
+        </div>
+        
+    </div>
+    
+    <div class="item-card">
+        <h3>
+            
+            <a href="https://arxiv.org/pdf/2602.23294v1" target="_blank">Towards Long-Form Spatio-Temporal Video Grounding</a>
+            
+        </h3>
+        
+        <div class="item-meta">
+            <span>✍️ Xin Gu, Bing Fan, Jiali Yao, Zhipeng Zhang, Yan Huang, Cheng Han, Heng Fan, Libo Zhang</span>
+            
+            <span>📅 2026-02-26</span>
+            
+            
+            <span>🔖 arXiv: 2602.23294v1</span>
+            
+        </div>
+        
+        <div class="item-description">In real scenarios, videos can span several minutes or even hours. However, existing research on spatio-temporal video grounding (STVG), given a textual query, mainly focuses on localizing targets in short videos of tens of seconds, typically less than one minute, which limits real-world applications. In this paper, we explore Long-Form STVG (LF-STVG), which aims to locate targets in long-term videos. Compared with short videos, long-term videos contain much longer temporal spans and more irrelevant information, making it difficult for existing STVG methods that process all frames at once. To address this challenge, we propose an AutoRegressive Transformer architecture for LF-STVG, termed ART-STVG. Unlike conventional STVG methods that require the entire video sequence to make predictions at once, ART-STVG treats the video as streaming input and processes frames sequentially, enabling efficient handling of long videos. To model spatio-temporal context, we design spatial and temporal memory banks and apply them to the decoders. Since memories from different moments are not always relevant to the current frame, we introduce simple yet effective memory selection strategies to provide more relevant information to the decoders, significantly improving performance. Furthermore, instead of parallel spatial and temporal localization, we propose a cascaded spatio-temporal design that connects the spatial decoder to the temporal decoder, allowing fine-grained spatial cues to assist complex temporal localization in long videos. Experiments on newly extended LF-STVG datasets show that ART-STVG significantly outperforms state-of-the-art methods, while achieving competitive performance on conventional short-form STVG.</div>
+        
+        
+        
+        <div class="keywords">
+            
+            <span class="keyword-tag">#transformer</span>
+            
+        </div>
+        
+        
+        <div style="margin-top: 0.75rem;">
+            <a href="https://arxiv.org/pdf/2602.23294v1" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                📄 查看PDF
+            </a>
+        </div>
+        
+    </div>
+    
+    <div class="item-card">
+        <h3>
+            
+            <a href="https://arxiv.org/pdf/2602.23357v1" target="_blank">Sensor Generalization for Adaptive Sensing in Event-based Object Detection via Joint Distribution Training</a>
+            
+        </h3>
+        
+        <div class="item-meta">
+            <span>✍️ Aheli Saha, René Schuster, Didier Stricker</span>
+            
+            <span>📅 2026-02-26</span>
+            
+            
+            <span>🔖 arXiv: 2602.23357v1</span>
+            
+        </div>
+        
+        <div class="item-description">Bio-inspired event cameras have recently attracted significant research due to their asynchronous and low-latency capabilities. These features provide a high dynamic range and significantly reduce motion blur. However, because of the novelty in the nature of their output signals, there is a gap in the variability of available data and a lack of extensive analysis of the parameters characterizing their signals. This paper addresses these issues by providing readers with an in-depth understanding of how intrinsic parameters affect the performance of a model trained on event data, specifically for object detection. We also use our findings to expand the capabilities of the downstream model towards sensor-agnostic robustness.</div>
+        
+        
+        
+        <div class="keywords">
+            
+            <span class="keyword-tag">#object detection</span>
+            
+        </div>
+        
+        
+        <div style="margin-top: 0.75rem;">
+            <a href="https://arxiv.org/pdf/2602.23357v1" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 500;">
+                📄 查看PDF
+            </a>
+        </div>
+        
+    </div>
+    
+
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>制造业信息资讯平台 | 最后更新: 2026-02-27 11:13:27</p>
+            <p>Powered by Manufacturing Info Spider</p>
+        </div>
+    </footer>
+
+    
+<script>
+function searchPapers() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const items = document.querySelectorAll('.item-card');
+
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', searchPapers);
+    }
+});
+</script>
+
+</body>
+</html>
