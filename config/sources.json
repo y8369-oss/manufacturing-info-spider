@@ -27,6 +27,34 @@
       "search_url": "https://www.leiphone.com/search?s={keyword}",
       "enabled": true,
       "type": "html"
+    },
+    {
+      "name": "盖世汽车社区",
+      "base_url": "https://auto.gasgoo.com",
+      "search_url": "https://auto.gasgoo.com/news/",
+      "enabled": true,
+      "type": "html"
+    },
+    {
+      "name": "第一电动汽车网",
+      "base_url": "https://www.d1ev.com",
+      "search_url": "https://www.d1ev.com/news/",
+      "enabled": true,
+      "type": "html"
+    },
+    {
+      "name": "赛雷",
+      "base_url": "https://www.cylion.com",
+      "search_url": "https://www.cylion.com/news/",
+      "enabled": true,
+      "type": "html"
+    },
+    {
+      "name": "董车会",
+      "base_url": "https://www.dongchehui.com",
+      "search_url": "https://www.dongchehui.com/",
+      "enabled": true,
+      "type": "html"
     }
   ],
   "patent_sources": [
